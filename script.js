@@ -43,7 +43,7 @@ initAccordion();
 function initScroll() {
   const linkInterno = document.querySelectorAll('.js-menu a[href^="#"]');
 
-  if (linkInterno) {
+  if (linkInterno.length) {
     function scrollToSection(event) {
       event.preventDefault();
       const href = event.currentTarget.getAttribute("href");
@@ -60,3 +60,27 @@ function initScroll() {
   }
 }
 initScroll();
+
+//Animação scroll
+
+function initScrollAnimation() {
+  const sections = document.querySelectorAll(".js-scroll");
+  sections[0].classList.add("ativo");
+
+  if (sections.length) {
+    const metadeTela = window.innerHeight * 0.6;
+    function scrollAnimation() {
+      sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top - metadeTela;
+        if (sectionTop < 0) {
+          section.classList.add("ativo");
+        } else {
+          section.classList.remove("ativo");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", scrollAnimation);
+  }
+}
+initScrollAnimation();
